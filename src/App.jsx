@@ -252,7 +252,7 @@ function App() {
         </nav>
       </header>
 
-      <main className="max-w-[var(--container-max)] mx-auto px-[var(--container-pad)]">
+      <main className="max-w-[var(--container-max)] mx-auto px-[var(--container-pad)] relative z-[1]">
         {currentView === "work" ? (
           /* ═══════════════════════════════════════════════════
                WORK / HOME VIEW
