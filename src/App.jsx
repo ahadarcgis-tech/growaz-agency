@@ -142,46 +142,48 @@ function App() {
     }
   ]
 
+  const base = import.meta.env.BASE_URL
+
   const galleryItems = [
     {
       id: "gallery-1",
       title: "Kinetic Forms Poster",
       description: "Poster design research exploring typographic architecture, Zurich Neue Moderne.",
       tag: "Typographic Poster Research",
-      imageSrc: "/gallery_project_1.png",
-      href: "/gallery_project_1.png"
+      imageSrc: `${base}gallery_project_1.png`,
+      href: `${base}gallery_project_1.png`
     },
     {
       id: "gallery-2",
       title: "Modernist Columns Study",
       description: "Structural modernist form and concrete support research, Munich Brutalist Exhibition.",
       tag: "Brutalist Form Exploration",
-      imageSrc: "/gallery_project_2.png",
-      href: "/gallery_project_2.png"
+      imageSrc: `${base}gallery_project_2.png`,
+      href: `${base}gallery_project_2.png`
     },
     {
       id: "gallery-3",
       title: "Bold Editorial Layout",
       description: "A high-contrast conceptual Swiss layout design for a digital publication canvas.",
       tag: "Conceptual UI Grid",
-      imageSrc: "/project_direction_a.png",
-      href: "/project_direction_a.png"
+      imageSrc: `${base}project_direction_a.png`,
+      href: `${base}project_direction_a.png`
     },
     {
       id: "gallery-4",
       title: "Calm & Premium Interface",
       description: "A serene, gallery-like architecture portfolio layout emphasizing asymmetric margins.",
       tag: "Architecture Web Design",
-      imageSrc: "/project_direction_b.png",
-      href: "/project_direction_b.png"
+      imageSrc: `${base}project_direction_b.png`,
+      href: `${base}project_direction_b.png`
     },
     {
       id: "gallery-5",
       title: "High-Energy Kinetic Web Portal",
       description: "Motion-forward digital experience featuring saturated glow outlines and marquee loops.",
       tag: "Interactive Design Layout",
-      imageSrc: "/project_direction_c.png",
-      href: "/project_direction_c.png"
+      imageSrc: `${base}project_direction_c.png`,
+      href: `${base}project_direction_c.png`
     }
   ]
 
@@ -305,7 +307,7 @@ function App() {
                 className="col-span-12 md:col-span-4 md:col-start-9 md:row-start-2 flex justify-end items-center mt-4 md:mt-0"
               >
                 <motion.img
-                  src="/hero_illustration.png"
+                  src={`${base}hero_illustration.png`}
                   alt="Design Systems Illustration"
                   animate={shouldReduceMotion ? {} : { y: [0, -6, 0] }}
                   transition={
