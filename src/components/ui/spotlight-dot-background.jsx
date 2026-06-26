@@ -33,12 +33,12 @@ export function SpotlightDotBackground() {
       ref={bgRef}
       className="pointer-events-none fixed inset-0 z-0"
       style={{
-        // Using stronger opacity to ensure it's visible
-        backgroundImage: 'radial-gradient(circle, rgba(232, 56, 13, 0.8) 1.5px, transparent 1.5px)',
-        backgroundSize: '24px 24px',
-        // Make the mask larger and more distinct
-        WebkitMaskImage: 'radial-gradient(circle 300px at var(--mouse-x, -100%) var(--mouse-y, -100%), black 0%, transparent 100%)',
-        maskImage: 'radial-gradient(circle 300px at var(--mouse-x, -100%) var(--mouse-y, -100%), black 0%, transparent 100%)',
+        // Intense, vivid dots with full opacity and larger size
+        backgroundImage: 'radial-gradient(circle, rgba(232, 56, 13, 1) 2.5px, transparent 2.5px)',
+        backgroundSize: '20px 20px',
+        // Larger spotlight radius with sharper falloff for more intensity
+        WebkitMaskImage: 'radial-gradient(circle 400px at var(--mouse-x, -100%) var(--mouse-y, -100%), black 0%, black 30%, transparent 100%)',
+        maskImage: 'radial-gradient(circle 400px at var(--mouse-x, -100%) var(--mouse-y, -100%), black 0%, black 30%, transparent 100%)',
       }}
     />
   );
