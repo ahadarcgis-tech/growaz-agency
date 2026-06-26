@@ -24,7 +24,12 @@ export default function ManageCaseStudies() {
 
   const handleSave = (e) => {
     e.preventDefault()
-    const updated = [...caseStudies, { ...newCase, id: Date.now() }]
+    let updated
+    if (newCase.id) {
+      updated = caseStudies.map(c => c.id === newCase.id ? newCase : c)
+    } else {
+      updated = [...caseStudies, { ...newCase, id: Date.now() }]
+    }
     setCaseStudies(updated)
     localStorage.setItem("growaz_cases", JSON.stringify(updated))
     setIsAdding(false)
@@ -52,7 +57,7 @@ export default function ManageCaseStudies() {
   if (isAdding) {
     return (
       <div className="bg-white rounded-2xl border border-gray-200 p-8">
-        <h2 className="text-2xl font-bold mb-6">Add New Case Study</h2>
+        <h2 className="text-2xl font-bold mb-6">{newCase.id ? "Edit Case Study" : "Add New Case Study"}</h2>
         <form onSubmit={handleSave} className="space-y-6 max-w-2xl">
           <div className="grid grid-cols-2 gap-6">
             <div>
@@ -134,11 +139,11 @@ export default function ManageCaseStudies() {
           </div>
 
           <div className="flex gap-4 pt-4 border-t border-gray-100">
-            <button type="button" onClick={() => setIsAdding(false)} className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 font-medium">
+            <button type="button" onClick={() => { setIsAdding(false); setNewCase({ title: "", client: "", year: "", description: "", image: "", websiteUrl: "" }) }} className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 font-medium">
               Cancel
             </button>
             <button type="submit" className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium">
-              Save Case Study
+              {newCase.id ? "Save Changes" : "Save Case Study"}
             </button>
           </div>
         </form>
@@ -184,8 +189,8 @@ export default function ManageCaseStudies() {
                   <td className="px-6 py-4 text-gray-500">{item.client}</td>
                   <td className="px-6 py-4 text-gray-500">{item.year}</td>
                   <td className="px-6 py-4 text-right">
-                    <button className="text-blue-600 hover:text-blue-900 mr-4"><Edit size={16}/></button>
-                    <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:text-red-900"><Trash2 size={16}/></button>
+                    <button onClick={() => { setNewCase(item); setIsAdding(true); }} className="text-blue-600 hover:text-blue-900 mr-4 cursor-pointer"><Edit size={16}/></button>
+                    <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:text-red-900 cursor-pointer"><Trash2 size={16}/></button>
                   </td>
                 </tr>
               ))
