@@ -81,6 +81,12 @@ function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    
+    // Save to local storage for the dashboard stats
+    const existing = JSON.parse(localStorage.getItem("growaz_inquiries") || "[]")
+    const newInquiry = { ...formData, service: selectedService, date: new Date().toISOString() }
+    localStorage.setItem("growaz_inquiries", JSON.stringify([...existing, newInquiry]))
+
     setFormSubmitted(true)
     setTimeout(() => {
       setIsDialogOpen(false)
