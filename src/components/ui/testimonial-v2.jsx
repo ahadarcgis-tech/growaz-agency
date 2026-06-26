@@ -110,7 +110,7 @@ function TestimonialsColumn({ className, testimonials, duration = 12 }) {
                         boxShadow: "3px 3px 0px #0C0C0C",
                       }
                 }
-                className="p-8 rounded-none border border-border shadow-none max-w-xs w-full bg-surface transition-all duration-300 cursor-default select-none focus:outline-none focus:ring-2 focus:ring-accent"
+                className="p-8 rounded-none border border-border shadow-none max-w-xs w-full bg-white relative z-10 transition-all duration-300 cursor-default select-none focus:outline-none focus:ring-2 focus:ring-accent"
               >
                 <blockquote className="m-0 p-0 text-left">
                   <p className="text-muted-foreground leading-relaxed font-normal m-0 text-sm">

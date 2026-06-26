@@ -319,7 +319,7 @@ function App() {
                         }
                   }
                   whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -2, boxShadow: "4px 4px 0px #0C0C0C" }}
-                  className="w-full max-w-[320px] aspect-square object-cover border-2 border-foreground bg-surface shadow-none select-none pointer-events-none"
+                  className="w-full max-w-[320px] aspect-square object-cover border-2 border-foreground bg-white relative z-10 shadow-none select-none pointer-events-none"
                 />
               </motion.div>
 
@@ -426,7 +426,7 @@ function App() {
                     variants={revealVariants(shouldReduceMotion)}
                     whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -4, x: -2, boxShadow: "3px 3px 0px #0C0C0C" }}
                     transition={customTransition}
-                    className="bg-surface border border-rule-light rounded-none p-6 flex flex-col justify-between h-full group transition-all"
+                    className="bg-white relative z-10 border border-rule-light rounded-none p-6 flex flex-col justify-between h-full group transition-all"
                   >
                     <div>
                       <span className="block text-sm font-normal text-faint tracking-widest mb-8">{service.number}</span>
@@ -518,21 +518,21 @@ function App() {
                       transition={customTransition}
                       className="grid grid-cols-1 md:grid-cols-3 gap-[var(--grid-gap)]"
                     >
-                      <motion.div whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -4, x: -2, boxShadow: "3px 3px 0px #0C0C0C" }} transition={customTransition} className="bg-surface border border-rule-light p-6 transition-colors">
+                      <motion.div whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -4, x: -2, boxShadow: "3px 3px 0px #0C0C0C" }} transition={customTransition} className="bg-white relative z-10 border border-rule-light p-6 transition-colors">
                         <span className="text-xs font-bold text-accent">STEP 01</span>
                         <h4 className="text-xl font-bold uppercase mt-2 mb-4">Discovery</h4>
                         <p className="text-sm text-muted-foreground leading-relaxed">
                           We start by researching your brand space, interviewing key stakeholders, and analyzing competitors to form a stark, unique value proposition.
                         </p>
                       </motion.div>
-                      <motion.div whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -4, x: -2, boxShadow: "3px 3px 0px #0C0C0C" }} transition={customTransition} className="bg-surface border border-rule-light p-6 transition-colors">
+                      <motion.div whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -4, x: -2, boxShadow: "3px 3px 0px #0C0C0C" }} transition={customTransition} className="bg-white relative z-10 border border-rule-light p-6 transition-colors">
                         <span className="text-xs font-bold text-accent">STEP 02</span>
                         <h4 className="text-xl font-bold uppercase mt-2 mb-4">Design</h4>
                         <p className="text-sm text-muted-foreground leading-relaxed">
                           We lay structural grids, map typographic hierarchy, and engineer customized design tokens before composing single-source-of-truth components.
                         </p>
                       </motion.div>
-                      <motion.div whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -4, x: -2, boxShadow: "3px 3px 0px #0C0C0C" }} transition={customTransition} className="bg-surface border border-rule-light p-6 transition-colors">
+                      <motion.div whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -4, x: -2, boxShadow: "3px 3px 0px #0C0C0C" }} transition={customTransition} className="bg-white relative z-10 border border-rule-light p-6 transition-colors">
                         <span className="text-xs font-bold text-accent">STEP 03</span>
                         <h4 className="text-xl font-bold uppercase mt-2 mb-4">Delivery</h4>
                         <p className="text-sm text-muted-foreground leading-relaxed">
@@ -549,7 +549,7 @@ function App() {
                       transition={customTransition}
                       className="grid grid-cols-1 md:grid-cols-2 gap-[var(--grid-gap)]"
                     >
-                      <motion.div whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -4, x: -2, boxShadow: "3px 3px 0px #0C0C0C" }} transition={customTransition} className="bg-surface border border-rule-light p-6 flex flex-col justify-between transition-colors cursor-pointer">
+                      <motion.div whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -4, x: -2, boxShadow: "3px 3px 0px #0C0C0C" }} transition={customTransition} className="bg-white relative z-10 border border-rule-light p-6 flex flex-col justify-between transition-colors cursor-pointer">
                         <div>
                           <span className="text-xs font-medium text-faint">VERMILION CORE / 2025</span>
                           <h4 className="text-xl font-bold uppercase mt-2 mb-4">Next-Gen FinTech Portal</h4>
@@ -558,7 +558,7 @@ function App() {
                           A high-contrast, typographically centered platform for a leading venture capital fund.
                         </p>
                       </motion.div>
-                      <motion.div whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -4, x: -2, boxShadow: "3px 3px 0px #0C0C0C" }} transition={customTransition} className="bg-surface border border-rule-light p-6 flex flex-col justify-between transition-colors cursor-pointer">
+                      <motion.div whileHover={shouldReduceMotion ? {} : { scale: 1.02, y: -4, x: -2, boxShadow: "3px 3px 0px #0C0C0C" }} transition={customTransition} className="bg-white relative z-10 border border-rule-light p-6 flex flex-col justify-between transition-colors cursor-pointer">
                         <div>
                           <span className="text-xs font-medium text-faint">KINETIC CORP / 2024</span>
                           <h4 className="text-xl font-bold uppercase mt-2 mb-4">Architecture Portfolio</h4>
@@ -718,7 +718,7 @@ function App() {
               <hr className="border-none h-[1px] bg-rule-light w-full" />
 
               <div className="grid grid-cols-1 pt-9 gap-8">
-                <div className="border border-border p-8 bg-surface flex flex-col justify-between">
+                <div className="border border-border p-8 bg-white relative z-10 flex flex-col justify-between">
                   <div>
                     <span className="text-xs font-bold text-accent">CEO & FOUNDER</span>
                     <h4 className="text-2xl font-bold uppercase mt-2 mb-4">Ahad</h4>

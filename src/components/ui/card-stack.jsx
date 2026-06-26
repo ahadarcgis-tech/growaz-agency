@@ -225,7 +225,7 @@ export function CardStack({
                   key={item.id}
                   className={cn(
                     "absolute bottom-0 rounded-none border-4 border-foreground overflow-hidden shadow-hard",
-                    "will-change-transform select-none bg-surface",
+                    "will-change-transform select-none bg-white relative z-10",
                     isActive
                       ? "cursor-grab active:cursor-grabbing"
                       : "cursor-pointer",
@@ -324,7 +324,7 @@ export function CardStack({
 
 function DefaultFanCard({ item }) {
   return (
-    <div className="relative h-full w-full bg-surface">
+    <div className="relative z-10 h-full w-full bg-white">
       {/* image */}
       <div className="absolute inset-0">
         {item.imageSrc ? (
