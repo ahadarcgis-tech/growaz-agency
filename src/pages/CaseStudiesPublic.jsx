@@ -51,29 +51,36 @@ export default function CaseStudiesPublic() {
           {caseStudies.length === 0 ? (
             <p className="text-muted-foreground">No case studies published yet.</p>
           ) : (
-            caseStudies.map((study) => (
-              <motion.div 
-                key={study.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02, y: -4, x: -2, boxShadow: "3px 3px 0px #0C0C0C" }}
-                className="bg-white relative z-10 border border-rule-light p-6 flex flex-col justify-between transition-all cursor-pointer"
-              >
-                {study.image && (
-                  <div className="w-full aspect-video bg-secondary mb-6 border border-rule-light overflow-hidden">
-                    <img src={study.image} alt={study.title} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
+            caseStudies.map((study) => {
+              const hasUrl = Boolean(study.websiteUrl)
+              const CardComponent = hasUrl ? motion.a : motion.div
+              const linkProps = hasUrl ? { href: study.websiteUrl, target: "_blank", rel: "noopener noreferrer" } : {}
+
+              return (
+                <CardComponent 
+                  key={study.id}
+                  {...linkProps}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.02, y: -4, x: -2, boxShadow: "3px 3px 0px #0C0C0C" }}
+                  className="bg-white relative z-10 border border-rule-light p-6 flex flex-col justify-between transition-all cursor-pointer no-underline text-foreground"
+                >
+                  {study.image && (
+                    <div className="w-full aspect-video bg-secondary mb-6 border border-rule-light overflow-hidden">
+                      <img src={study.image} alt={study.title} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
+                    </div>
+                  )}
+                  <div>
+                    <span className="text-xs font-bold text-accent uppercase tracking-widest">{study.client} / {study.year}</span>
+                    <h2 className="text-2xl font-bold uppercase mt-2 mb-4 leading-tight">{study.title}</h2>
+                    <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+                      {study.description}
+                    </p>
                   </div>
-                )}
-                <div>
-                  <span className="text-xs font-bold text-accent uppercase tracking-widest">{study.client} / {study.year}</span>
-                  <h2 className="text-2xl font-bold uppercase mt-2 mb-4 leading-tight">{study.title}</h2>
-                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-                    {study.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))
+                </CardComponent>
+              )
+            })
           )}
         </div>
       </main>

@@ -5,7 +5,7 @@ import { Plus, Edit, Trash2, Image as ImageIcon } from "lucide-react"
 export default function ManageCaseStudies() {
   const [caseStudies, setCaseStudies] = useState([])
   const [isAdding, setIsAdding] = useState(false)
-  const [newCase, setNewCase] = useState({ title: "", client: "", year: "", description: "", image: "" })
+  const [newCase, setNewCase] = useState({ title: "", client: "", year: "", description: "", image: "", websiteUrl: "" })
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function ManageCaseStudies() {
     } else {
       // Mock initial data
       const initial = [
-        { id: 1, title: "FinTech Portal", client: "Vermilion Core", year: "2025", description: "A high-contrast platform." }
+        { id: 1, title: "FinTech Portal", client: "Vermilion Core", year: "2025", description: "A high-contrast platform.", websiteUrl: "https://example.com" }
       ]
       setCaseStudies(initial)
       localStorage.setItem("growaz_cases", JSON.stringify(initial))
@@ -28,7 +28,7 @@ export default function ManageCaseStudies() {
     setCaseStudies(updated)
     localStorage.setItem("growaz_cases", JSON.stringify(updated))
     setIsAdding(false)
-    setNewCase({ title: "", client: "", year: "", description: "", image: "" })
+    setNewCase({ title: "", client: "", year: "", description: "", image: "", websiteUrl: "" })
   }
 
   const handleDelete = (id) => {
@@ -84,6 +84,17 @@ export default function ManageCaseStudies() {
               type="text" 
               value={newCase.year}
               onChange={e => setNewCase({...newCase, year: e.target.value})}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Live Website URL</label>
+            <input 
+              type="url" 
+              placeholder="https://"
+              value={newCase.websiteUrl || ""}
+              onChange={e => setNewCase({...newCase, websiteUrl: e.target.value})}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
             />
           </div>
