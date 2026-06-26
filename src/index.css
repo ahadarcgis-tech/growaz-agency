@@ -1,0 +1,170 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme inline {
+  /* Wire design tokens into Tailwind v4 theme system */
+  --font-sans: "Space Grotesk", "Arial", sans-serif;
+  --font-heading: "Space Grotesk", "Arial", sans-serif;
+
+  /* Spacing Scale (8px base) */
+  --spacing-0_5: 0.125rem;
+  --spacing-1: 0.25rem;
+  --spacing-1_5: 0.375rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-7: 2rem;
+  --spacing-8: 2.5rem;
+  --spacing-9: 3rem;
+  --spacing-10: 4rem;
+  --spacing-11: 5rem;
+  --spacing-12: 6rem;
+  --spacing-14: 8rem;
+  --spacing-16: 10rem;
+
+  /* Typography Scale */
+  --text-xs: 0.64rem;
+  --text-sm: 0.8rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.563rem;
+  --text-2xl: 1.953rem;
+  --text-3xl: 2.441rem;
+  --text-4xl: 3.052rem;
+  --text-5xl: 3.815rem;
+  --text-6xl: 4.768rem;
+  --text-7xl: 5.96rem;
+  --text-8xl: 7.451rem;
+
+  /* Shadows (Neo-brutalist hard shadows) */
+  --shadow-hard: 3px 3px 0 #0C0C0C;
+  --shadow-hard-sm: 2px 2px 0 #0C0C0C;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+
+  /* Custom token colors and layouts */
+  --color-faint: #ABABAB;
+  --color-rule: #1A1A1A;
+  --color-rule-light: #D4D4D0;
+  --color-surface: #FFFFFF;
+  --color-border-strong: #1A1A1A;
+  --container-max: 87.5rem;
+  --container-pad: 2rem;
+  --grid-gap: 1.25rem;
+
+  /* shadcn mappings */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Radius overrides */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+}
+
+:root {
+  /* Color Palette — 60 / 30 / 10 */
+  --background: #FAFAF7; /* Warm white canvas */
+  --foreground: #0C0C0C; /* Stark black text */
+
+  --card: #FFFFFF;
+  --card-foreground: #0C0C0C;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #0C0C0C;
+
+  --primary: #0C0C0C; /* Stark black for buttons, tabs */
+  --primary-foreground: #FAFAF7;
+
+  --secondary: #F0F0EC;
+  --secondary-foreground: #0C0C0C;
+
+  --muted: #F0F0EC;
+  --muted-foreground: #6B6B6B;
+
+  --accent: #E8380D; /* Vermillion */
+  --accent-foreground: #FFFFFF;
+
+  --destructive: #CF222E;
+  --destructive-foreground: #FFFFFF;
+
+  /* Borders & Inputs */
+  --border: #1A1A1A; /* Hard black rules */
+  --input: #1A1A1A;
+  --ring: #E8380D; /* Focus indicator in vermillion */
+
+  --radius: 0px; /* Absolutely zero rounding */
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   VISIBLE GRID OVERLAY
+
+   A fixed 12-column overlay showing the underlying grid.
+   Faint red column markers — always present, never intrusive.
+   Press 'g' to toggle.
+   ═══════════════════════════════════════════════════════════ */
+
+.grid-overlay {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--container-max, 87.5rem);
+  height: 100%;
+  padding-inline: var(--container-pad, 2rem);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--grid-gap, 1.25rem);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.grid-overlay > div {
+  background-color: rgba(232, 56, 13, 0.018);
+  border-inline: 1px solid rgba(232, 56, 13, 0.045);
+}
+
+.grid-overlay.is-hidden {
+  display: none;
+}

@@ -1,0 +1,31 @@
+{
+  "hash": "8045686a",
+  "configHash": "a401e764",
+  "lockfileHash": "0f1aeb60",
+  "browserHash": "fdf86d86",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "0b01cc8d",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "e4fdc265",
+      "needsInterop": true
+    },
+    "motion/react": {
+      "src": "../../node_modules/motion/dist/es/react.mjs",
+      "file": "motion_react.js",
+      "fileHash": "276aa46d",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-SRRNBJOT": {
+      "file": "chunk-SRRNBJOT.js"
+    }
+  }
+}
