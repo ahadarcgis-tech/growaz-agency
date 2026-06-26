@@ -9,17 +9,29 @@ import ManageWebsite from "./admin/ManageWebsite"
 import AdminLogin from "./admin/AdminLogin"
 
 function App() {
-  // Simple mock auth state for local testing
-  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false)
+  // Simple mock auth state for local testing, persisted in localStorage
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
+    return localStorage.getItem("growaz_admin_auth") === "true"
+  })
+
+  const handleLogin = () => {
+    localStorage.setItem("growaz_admin_auth", "true")
+    setIsAdminLoggedIn(true)
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("growaz_admin_auth")
+    setIsAdminLoggedIn(false)
+  }
 
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/case-studies" element={<CaseStudiesPublic />} />
       
-      <Route path="/admin/login" element={<AdminLogin onLogin={() => setIsAdminLoggedIn(true)} />} />
+      <Route path="/admin/login" element={isAdminLoggedIn ? <Navigate to="/admin" /> : <AdminLogin onLogin={handleLogin} />} />
       
-      <Route path="/admin" element={isAdminLoggedIn ? <AdminLayout onLogout={() => setIsAdminLoggedIn(false)} /> : <Navigate to="/admin/login" />}>
+      <Route path="/admin" element={isAdminLoggedIn ? <AdminLayout onLogout={handleLogout} /> : <Navigate to="/admin/login" />}>
         <Route index element={<DashboardOverview />} />
         <Route path="case-studies" element={<ManageCaseStudies />} />
         <Route path="website" element={<ManageWebsite />} />
