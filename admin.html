@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Daughter Spoon</title>
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        olive: { 50: '#F4F7F0', 100: '#E6EFE1', 500: '#6B7B3A', 600: '#5A6830', 700: '#4A5528' },
+                        terracotta: { 50: '#FEF6F4', 300: '#E89F8B', 400: '#E07A5F', 500: '#D55E40', 600: '#BC4B2E' },
+                        cream: { 50: '#FDFBF7', 100: '#FBF8F4', 200: '#F4ECD8' },
+                        warm: { 50: '#FAF9F6', 100: '#F5F2EB', 200: '#EAE5D9', 300: '#DED5C5' },
+                        charcoal: { 500: '#666666', 600: '#4D4D4D', 700: '#333333', 800: '#222222', 900: '#111111' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #F4F7F0; }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        
+        .toast {
+            animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .image-preview {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-charcoal-800 pb-20 bg-[#F4F7F0]">
+
+    <!-- Login Screen -->
+    <div id="login-container" class="fixed inset-0 bg-olive-50 flex items-center justify-center z-[100] px-4">
+        <div class="bg-white p-8 sm:p-10 rounded-3xl shadow-xl border border-warm-200 w-full max-w-md text-center">
+            <span class="text-4xl mb-4 block">🥄</span>
+            <h1 class="font-serif text-3xl font-bold text-charcoal-900 mb-2">Welcome Back</h1>
+            <p class="text-charcoal-500 text-sm mb-8">Please enter the admin password to access the Content Manager.</p>
+            
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <div class="mb-5 text-left">
+                    <label for="admin-password" class="block text-sm font-semibold text-charcoal-700 mb-2">Password</label>
+                    <input type="password" id="admin-password" required placeholder="••••••••"
+                        class="w-full px-4 py-3 rounded-xl border-2 border-warm-200 focus:border-olive-500 focus:outline-none transition-colors text-sm">
+                    <p id="login-error" class="text-terracotta-500 text-xs mt-2 hidden font-medium">Incorrect password. Please try again.</p>
+                </div>
+                <button type="submit" class="w-full bg-olive-600 hover:bg-olive-700 text-white font-semibold py-3.5 rounded-xl transition-all shadow-sm hover:shadow-md">
+                    Unlock Dashboard
+                </button>
+            </form>
+            
+            <a href="index.html" class="inline-block mt-6 text-sm text-charcoal-400 hover:text-terracotta-500 transition-colors">
+                ← Return to Live Site
+            </a>
+        </div>
+    </div>
+
+    <!-- Dashboard Container -->
+    <div id="dashboard-container" class="hidden">
+        <!-- Navbar -->
+        <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🥄</span>
+                <span class="font-serif text-xl font-bold">Admin <span class="text-terracotta-500">Dashboard</span></span>
+            </div>
+            <div class="flex gap-4">
+                <a href="index.html" target="_blank" class="text-sm font-medium text-olive-600 hover:text-olive-700 flex items-center gap-1">
+                    View Live Site
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                </a>
+                <button onclick="saveAll()" class="bg-olive-600 hover:bg-olive-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                    Save All Changes
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 mt-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-warm-200 overflow-hidden">
+            
+            <div class="p-6 border-b border-warm-100 bg-cream-50">
+                <h2 class="font-serif text-2xl font-bold text-charcoal-900">Content Manager</h2>
+                <p class="text-sm text-charcoal-500 mt-1">Update text and upload images. Images are automatically compressed to save space.</p>
+            </div>
+
+            <div class="p-6 md:p-8 space-y-12">
+                
+                <!-- HERO SECTION -->
+                <section>
+                    <h3 class="text-lg font-bold text-terracotta-600 border-b border-warm-200 pb-2 mb-6">Hero Section</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-charcoal-700 mb-1">Background Image</label>
+                            <input type="file" accept="image/*" id="input-hero-bg-img" data-type="image" data-target="hero-bg-img" class="block w-full text-sm text-charcoal-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-olive-50 file:text-olive-700 hover:file:bg-olive-100">
+                            <img id="preview-hero-bg-img" class="image-preview" alt="Preview">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-charcoal-700 mb-1">Badge Text</label>
+                            <input type="text" id="input-hero-badge-text" data-target="hero-badge-text" class="w-full px-3 py-2 border border-warm-300 rounded-lg focus:outline-none focus:border-olive-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-charcoal-700 mb-1">Headline Line 1</label>
+                            <input type="text" id="input-hero-h1-l1" data-target="hero-h1-l1" class="w-full px-3 py-2 border border-warm-300 rounded-lg focus:outline-none focus:border-olive-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-charcoal-700 mb-1">Headline Line 2 (Italic)</label>
+                            <input type="text" id="input-hero-h1-l2" data-target="hero-h1-l2" class="w-full px-3 py-2 border border-warm-300 rounded-lg focus:outline-none focus:border-olive-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-charcoal-700 mb-1">Headline Line 3</label>
+                            <input type="text" id="input-hero-h1-l3" data-target="hero-h1-l3" class="w-full px-3 py-2 border border-warm-300 rounded-lg focus:outline-none focus:border-olive-500 text-sm">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-charcoal-700 mb-1">Subheadline</label>
+                            <textarea id="input-hero-subtext" data-target="hero-subtext" rows="2" class="w-full px-3 py-2 border border-warm-300 rounded-lg focus:outline-none focus:border-olive-500 text-sm"></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MENU ITEMS SECTION -->
+                <section>
+                    <div class="flex justify-between items-center border-b border-warm-200 pb-2 mb-6">
+                        <h3 class="text-lg font-bold text-terracotta-600">Menu Items</h3>
+                        <button onclick="addMenuItem()" class="bg-olive-100 hover:bg-olive-200 text-olive-700 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                            Add Item
+                        </button>
+                    </div>
+                    
+                    <div id="menu-items-container" class="space-y-6">
+                        <!-- Menu items will be injected here by JS -->
+                    </div>
+                </section>
+
+                <!-- ITEMS PAGE SECTION -->
+                <section>
+                    <div class="flex justify-between items-center border-b border-warm-200 pb-2 mb-6">
+                        <h3 class="text-lg font-bold text-terracotta-600">Extra Items (Items Page)</h3>
+                        <button onclick="addExtraItem()" class="bg-olive-100 hover:bg-olive-200 text-olive-700 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                            Add Extra Item
+                        </button>
+                    </div>
+                    
+                    <div id="extra-items-container" class="space-y-6">
+                        <!-- Items will be injected here by JS -->
+                    </div>
+                </section>
+
+                <!-- STORY & TESTIMONIAL SECTION -->
+                <section>
+                    <h3 class="text-lg font-bold text-terracotta-600 border-b border-warm-200 pb-2 mb-6">Our Story & Testimonial</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-charcoal-700 mb-1">Story Image</label>
+                            <input type="file" accept="image/*" id="input-story-img" data-type="image" data-target="story-img" class="block w-full text-sm text-charcoal-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-olive-50 file:text-olive-700 hover:file:bg-olive-100">
+                            <img id="preview-story-img" class="image-preview" alt="Preview">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-charcoal-700 mb-1">Years of Love (Badge)</label>
+                            <input type="text" id="input-story-years" data-target="story-years" class="w-full px-3 py-2 border border-warm-300 rounded-lg focus:outline-none focus:border-olive-500 text-sm">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-charcoal-700 mb-1">Story Paragraph 1</label>
+                            <textarea id="input-story-para1" data-target="story-para1" rows="3" class="w-full px-3 py-2 border border-warm-300 rounded-lg focus:outline-none focus:border-olive-500 text-sm"></textarea>
+                        </div>
+                        <div class="md:col-span-2 border-t border-warm-200 pt-6 mt-2">
+                            <label class="block text-sm font-medium text-charcoal-700 mb-1">Testimonial Quote</label>
+                            <textarea id="input-testimonial-text" data-target="testimonial-text" rows="2" class="w-full px-3 py-2 border border-warm-300 rounded-lg focus:outline-none focus:border-olive-500 text-sm"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-charcoal-700 mb-1">Testimonial Name</label>
+                            <input type="text" id="input-testimonial-name" data-target="testimonial-name" class="w-full px-3 py-2 border border-warm-300 rounded-lg focus:outline-none focus:border-olive-500 text-sm">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FOOTER SECTION -->
+                <section>
+                    <h3 class="text-lg font-bold text-terracotta-600 border-b border-warm-200 pb-2 mb-6">Contact / Footer</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-charcoal-700 mb-1">Email Address</label>
+                            <input type="text" id="input-footer-email" data-target="footer-email" class="w-full px-3 py-2 border border-warm-300 rounded-lg focus:outline-none focus:border-olive-500 text-sm">
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            
+            <div class="p-6 border-t border-warm-200 bg-warm-50 flex justify-between items-center">
+                <button onclick="logoutAdmin()" class="text-sm font-medium text-charcoal-500 hover:text-terracotta-500 transition-colors">
+                    Lock Dashboard
+                </button>
+                <button onclick="saveAll()" class="bg-terracotta-500 hover:bg-terracotta-600 text-white px-8 py-3 rounded-full font-semibold shadow-sm transition-transform hover:-translate-y-0.5">
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </main>
+    </div> <!-- End Dashboard Container -->
+
+    <!-- Toast container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3"></div>
+
+    <script>
+        // Default text content for inputs
+        const defaultTextData = {
+            'hero-badge-text': 'Handcrafted with Love',
+            'hero-h1-l1': 'Wholesome Goodness,',
+            'hero-h1-l2': 'Delivered to',
+            'hero-h1-l3': 'Your Door.',
+            'hero-subtext': 'Authentic homemade meals and artisanal snacks made with love — from our kitchen to your table.',
+            'story-years': '15+',
+            'story-para1': 'Daughter Spoon began as a cherished tradition — a mother teaching her daughter the art of home cooking. What started with family recipes whispered over simmering pots has blossomed into a labor of love, bringing the warmth and soul of homemade food to our community.',
+            'testimonial-text': '"The flavors remind me of my grandmother\'s cooking — each bite is pure comfort and love. Daughter Spoon has become our family\'s favorite."',
+            'testimonial-name': 'Sarah Ahmed',
+            'footer-email': 'hello@daughterspoon.com'
+        };
+
+        const defaultMenuData = [
+            {
+                id: 'menu-1',
+                image: 'snack-box.png',
+                name: 'Signature Snack Box',
+                price: '$24',
+                desc: 'A curated selection of crispy samosas, spring rolls, spiced pakoras, and three artisanal chutneys.',
+                label: 'Bestseller'
+            },
+            {
+                id: 'menu-2',
+                image: 'comfort-meal.png',
+                name: 'Comfort Meal of the Day',
+                price: '$18',
+                desc: 'Aromatic chicken biryani with fragrant spices, creamy raita, and warm naan bread on the side.',
+                label: 'Chef\'s Pick'
+            },
+            {
+                id: 'menu-3',
+                image: 'cookies.png',
+                name: 'Artisanal Cookies',
+                price: '$12',
+                desc: 'A dozen handmade cookies — chocolate chip, buttery shortbread, and crunchy almond. Pure bliss.',
+                label: 'Sweet Treats'
+            },
+            {
+                id: 'menu-4',
+                image: 'lemonade.png',
+                name: 'Fresh Lemonade',
+                price: '$6',
+                desc: 'Freshly squeezed lemonade with a hint of mint and honey. The perfect companion to any meal.',
+                label: 'Refreshing'
+            }
+        ];
+
+        const defaultItemsData = [
+            {
+                id: 'item-1',
+                image: 'spices.png',
+                name: 'Premium Spices Set',
+                price: '$35',
+                desc: 'A curated box of our finest hand-ground spices used in all our signature dishes.',
+                label: 'Pantry'
+            },
+            {
+                id: 'item-2',
+                image: 'hero-bg.jpg',
+                name: 'Gift Card',
+                price: '$50',
+                desc: 'Give the gift of homemade meals. Can be used for catering or daily orders.',
+                label: 'Gift'
+            },
+            {
+                id: 'item-3',
+                image: 'snack-box.png',
+                name: 'Spoon Merchandise Tote',
+                price: '$15',
+                desc: 'A heavy-duty canvas tote bag featuring our classic logo. Perfect for groceries.',
+                label: 'Merch'
+            },
+            {
+                id: 'item-4',
+                image: 'cookies.png',
+                name: 'Custom Catering Consultation',
+                price: 'Free',
+                desc: 'Book a 30-minute session with our chef to plan your next event menu.',
+                label: 'Service'
+            },
+            {
+                id: 'item-5',
+                image: 'catering-spread.png',
+                name: 'Family Feast Bundle',
+                price: '$85',
+                desc: 'A complete meal for 4-6 people including mains, sides, and dessert.',
+                label: 'Bundle'
+            },
+            {
+                id: 'item-6',
+                image: 'comfort-meal.png',
+                name: 'Weekly Meal Prep (5 Days)',
+                price: '$120',
+                desc: 'Fresh, healthy homemade lunches prepared and delivered for your work week.',
+                label: 'Subscription'
+            },
+            {
+                id: 'item-7',
+                image: 'snack-box.png',
+                name: 'Artisan Chutney Trio',
+                price: '$22',
+                desc: 'Three jars of our signature homemade chutneys: Mango, Mint-Coriander, and Tamarind.',
+                label: 'Pantry'
+            },
+            {
+                id: 'item-8',
+                image: 'lemonade.png',
+                name: 'Signature Marinade Bottle',
+                price: '$14',
+                desc: 'Our secret family marinade recipe, perfect for grilling chicken or vegetables.',
+                label: 'Pantry'
+            },
+            {
+                id: 'item-9',
+                image: 'hero-bg.jpg',
+                name: 'Cooking Masterclass (Virtual)',
+                price: '$45',
+                desc: 'Join a 2-hour live virtual cooking class with our head chef.',
+                label: 'Event'
+            },
+            {
+                id: 'item-10',
+                image: 'cookies.png',
+                name: 'Seasonal Dessert Box',
+                price: '$30',
+                desc: 'A rotating selection of seasonal sweets and pastries.',
+                label: 'Sweet Treats'
+            }
+        ];
+
+        let siteData = {
+            text: {},
+            images: {},
+            menu: [],
+            items: []
+        };
+
+        // --- Authentication Logic ---
+        const ADMIN_PASSWORD = "daughterspoon2026"; // Simple client-side password
+
+        function checkAuth() {
+            if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+                document.getElementById('login-container').classList.add('hidden');
+                document.getElementById('dashboard-container').classList.remove('hidden');
+                document.body.style.backgroundColor = '#F4F7F0'; // restore background
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const passInput = document.getElementById('admin-password').value;
+            if (passInput === ADMIN_PASSWORD) {
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                document.getElementById('login-error').classList.add('hidden');
+                checkAuth();
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem('adminLoggedIn');
+            document.getElementById('admin-password').value = '';
+            document.getElementById('login-container').classList.remove('hidden');
+            document.getElementById('dashboard-container').classList.add('hidden');
+        }
+
+        // --- Core Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            
+            const savedContent = localStorage.getItem('daughterSpoonContent');
+            if (savedContent) {
+                try {
+                    siteData = JSON.parse(savedContent);
+                } catch(e) { console.error(e); }
+            }
+            
+            // Backfill defaults if needed
+            if (!siteData.text) siteData.text = {};
+            if (!siteData.images) siteData.images = {};
+            if (!siteData.menu || siteData.menu.length === 0) siteData.menu = JSON.parse(JSON.stringify(defaultMenuData));
+            if (!siteData.items || siteData.items.length === 0) siteData.items = JSON.parse(JSON.stringify(defaultItemsData));
+
+            // 1. Populate Text Inputs
+            document.querySelectorAll('input[type="text"][data-target], textarea[data-target]').forEach(input => {
+                const target = input.getAttribute('data-target');
+                input.value = siteData.text[target] !== undefined ? siteData.text[target] : (defaultTextData[target] || '');
+            });
+
+            // 2. Populate Static Images
+            document.querySelectorAll('input[type="file"][data-type="image"]').forEach(input => {
+                const target = input.getAttribute('data-target');
+                setupImageUpload(input, target);
+                
+                // Show preview if exists
+                let imgData = siteData.images[target];
+                if (!imgData) {
+                    if (target === 'hero-bg-img') imgData = 'hero-bg.jpg';
+                    if (target === 'story-img') imgData = 'spices.png';
+                }
+                if (imgData) {
+                    const preview = document.getElementById(`preview-${target}`);
+                    if (preview) {
+                        preview.src = imgData;
+                        preview.style.display = 'block';
+                    }
+                }
+            });
+
+            // Render Lists
+            renderMenuAdmin();
+            renderItemsAdmin();
+        });
+
+        // --- Menu Logic ---
+        function renderMenuAdmin() {
+            const container = document.getElementById('menu-items-container');
+            container.innerHTML = '';
+
+            siteData.menu.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'bg-warm-50 p-5 rounded-xl border border-warm-200 relative';
+                div.innerHTML = `
+                    <button onclick="removeMenuItem(${index})" class="absolute top-4 right-4 text-charcoal-400 hover:text-terracotta-500 transition-colors" title="Remove Item">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    </button>
+                    <h4 class="font-semibold text-charcoal-800 mb-4">Item ${index + 1}</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="md:col-span-1">
+                            <label class="block text-xs font-medium text-charcoal-600 mb-1">Image</label>
+                            <input type="file" accept="image/*" class="menu-img-upload block w-full text-xs text-charcoal-500 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:bg-olive-50 file:text-olive-700" data-index="${index}">
+                            <img src="${item.image}" class="image-preview" style="display:block; height:80px;" id="preview-menu-${index}">
+                        </div>
+                        <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-charcoal-600 mb-1">Name</label>
+                                <input type="text" value="${item.name.replace(/"/g, '&quot;')}" class="menu-name w-full px-3 py-1.5 border border-warm-300 rounded-md text-sm" data-index="${index}">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-charcoal-600 mb-1">Price</label>
+                                <input type="text" value="${item.price}" class="menu-price w-full px-3 py-1.5 border border-warm-300 rounded-md text-sm" data-index="${index}">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-charcoal-600 mb-1">Tag/Label</label>
+                                <input type="text" value="${item.label}" class="menu-label w-full px-3 py-1.5 border border-warm-300 rounded-md text-sm" data-index="${index}">
+                            </div>
+                            <div class="md:col-span-3">
+                                <label class="block text-xs font-medium text-charcoal-600 mb-1">Description</label>
+                                <input type="text" value="${item.desc.replace(/"/g, '&quot;')}" class="menu-desc w-full px-3 py-1.5 border border-warm-300 rounded-md text-sm" data-index="${index}">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+
+                // Attach file listener for menu image
+                const fileInput = div.querySelector('.menu-img-upload');
+                fileInput.addEventListener('change', function(e) {
+                    processImage(e.target.files[0], (base64) => {
+                        siteData.menu[index].image = base64;
+                        document.getElementById(`preview-menu-${index}`).src = base64;
+                    });
+                });
+            });
+        }
+
+        function addMenuItem() {
+            siteData.menu.push({
+                id: 'menu-' + Date.now(),
+                image: 'snack-box.png',
+                name: 'New Item',
+                price: '$10',
+                desc: 'Description goes here.',
+                label: 'New'
+            });
+            renderMenuAdmin();
+        }
+
+        function removeMenuItem(index) {
+            if (confirm("Are you sure you want to remove this item?")) {
+                siteData.menu.splice(index, 1);
+                renderMenuAdmin();
+            }
+        }
+
+        function renderItemsAdmin() {
+            const container = document.getElementById('extra-items-container');
+            container.innerHTML = '';
+            
+            siteData.items.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-white rounded-xl border border-warm-200 grid grid-cols-1 md:grid-cols-4 gap-4 items-center';
+                div.innerHTML = `
+                    <div class="md:col-span-4 flex justify-between items-center mb-2">
+                        <span class="font-bold text-charcoal-700 text-sm">Extra Item #${index + 1}</span>
+                        <button onclick="removeExtraItem(${index})" class="text-terracotta-500 hover:text-terracotta-600 text-sm font-semibold">Remove</button>
+                    </div>
+                    <div class="md:col-span-1">
+                        <label class="block text-xs font-medium text-charcoal-600 mb-1">Image</label>
+                        <input type="file" accept="image/*" class="item-img-upload block w-full text-xs text-charcoal-500 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:bg-olive-50 file:text-olive-700" data-index="${index}">
+                        <img src="${item.image}" class="image-preview" style="display:block; height:80px;" id="preview-item-${index}">
+                    </div>
+                    <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-charcoal-600 mb-1">Name</label>
+                            <input type="text" value="${item.name.replace(/"/g, '&quot;')}" class="item-name w-full px-3 py-1.5 border border-warm-300 rounded-md text-sm" data-index="${index}">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-charcoal-600 mb-1">Price</label>
+                            <input type="text" value="${item.price}" class="item-price w-full px-3 py-1.5 border border-warm-300 rounded-md text-sm" data-index="${index}">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-charcoal-600 mb-1">Tag/Label</label>
+                            <input type="text" value="${item.label}" class="item-label w-full px-3 py-1.5 border border-warm-300 rounded-md text-sm" data-index="${index}">
+                        </div>
+                        <div class="md:col-span-3">
+                            <label class="block text-xs font-medium text-charcoal-600 mb-1">Description</label>
+                            <input type="text" value="${item.desc.replace(/"/g, '&quot;')}" class="item-desc w-full px-3 py-1.5 border border-warm-300 rounded-md text-sm" data-index="${index}">
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+
+                const fileInput = div.querySelector('.item-img-upload');
+                fileInput.addEventListener('change', function(e) {
+                    processImage(e.target.files[0], (base64) => {
+                        siteData.items[index].image = base64;
+                        document.getElementById(`preview-item-${index}`).src = base64;
+                    });
+                });
+            });
+        }
+
+        function addExtraItem() {
+            siteData.items.push({
+                id: 'item-' + Date.now(),
+                image: 'snack-box.png',
+                name: 'New Extra Item',
+                price: '$10',
+                desc: 'Description goes here.',
+                label: 'New'
+            });
+            renderItemsAdmin();
+        }
+
+        function removeExtraItem(index) {
+            if (confirm("Are you sure you want to remove this item?")) {
+                siteData.items.splice(index, 1);
+                renderItemsAdmin();
+            }
+        }
+
+        // --- Save Logic ---
+        function saveAll() {
+            // Save Text
+            document.querySelectorAll('input[type="text"][data-target], textarea[data-target]').forEach(input => {
+                siteData.text[input.getAttribute('data-target')] = input.value;
+            });
+
+            // Save Menu updates (text only, images are saved on change)
+            document.querySelectorAll('.menu-name').forEach(el => siteData.menu[el.dataset.index].name = el.value);
+            document.querySelectorAll('.menu-price').forEach(el => siteData.menu[el.dataset.index].price = el.value);
+            document.querySelectorAll('.menu-label').forEach(el => siteData.menu[el.dataset.index].label = el.value);
+            document.querySelectorAll('.menu-desc').forEach(el => siteData.menu[el.dataset.index].desc = el.value);
+
+            // Save Items updates
+            document.querySelectorAll('.item-name').forEach(el => siteData.items[el.dataset.index].name = el.value);
+            document.querySelectorAll('.item-price').forEach(el => siteData.items[el.dataset.index].price = el.value);
+            document.querySelectorAll('.item-label').forEach(el => siteData.items[el.dataset.index].label = el.value);
+            document.querySelectorAll('.item-desc').forEach(el => siteData.items[el.dataset.index].desc = el.value);
+
+            try {
+                localStorage.setItem('daughterSpoonContent', JSON.stringify(siteData));
+                showToast('Changes saved successfully!');
+            } catch (e) {
+                if (e.name === 'QuotaExceededError') {
+                    showToast('Error: Storage limit exceeded. Try using smaller images.');
+                } else {
+                    showToast('An error occurred while saving.');
+                }
+            }
+        }
+
+        // --- Image Compression & Upload ---
+        function setupImageUpload(inputEl, targetId) {
+            inputEl.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                processImage(file, (base64) => {
+                    siteData.images[targetId] = base64;
+                    const preview = document.getElementById(`preview-${targetId}`);
+                    if (preview) {
+                        preview.src = base64;
+                        preview.style.display = 'block';
+                    }
+                });
+            });
+        }
+
+        // Compresses image using Canvas to avoid crashing localStorage
+        function processImage(file, callback) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function(event) {
+                const img = new Image();
+                img.src = event.target.result;
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 1200;
+                    const MAX_HEIGHT = 1200;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Compress as JPEG 70% quality
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                    callback(dataUrl);
+                }
+            }
+        }
+
+        // --- UI Feedback ---
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast flex items-center gap-3 bg-white shadow-lg rounded-xl px-5 py-4 border border-warm-100 max-w-sm';
+            toast.innerHTML = `
+                <div class="w-8 h-8 bg-olive-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-olive-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <p class="text-sm font-medium text-charcoal-700">${message}</p>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+    </script>
+</body>
+</html>

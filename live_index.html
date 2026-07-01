@@ -310,10 +310,6 @@
 
                 <!-- Desktop Links -->
                 <div class="hidden md:flex items-center gap-8">
-                    <a href="items.html" class="text-sm font-medium text-charcoal-700 hover:text-terracotta-500 transition-colors duration-300 relative group">
-                        Items
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-terracotta-400 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
                     <a href="#menu" class="text-sm font-medium text-charcoal-700 hover:text-terracotta-500 transition-colors duration-300 relative group">
                         Menu
                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-terracotta-400 transition-all duration-300 group-hover:w-full"></span>
@@ -359,7 +355,6 @@
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="mobile-menu is-closed md:hidden pb-4">
                 <div class="bg-white/95 backdrop-blur-lg rounded-2xl shadow-lg p-6 space-y-1 border border-warm-200">
-                    <a href="items.html" class="block px-4 py-3 rounded-xl text-charcoal-700 font-medium hover:bg-cream-100 hover:text-terracotta-500 transition-all duration-300">Items</a>
                     <a href="#menu" class="block px-4 py-3 rounded-xl text-charcoal-700 font-medium hover:bg-cream-100 hover:text-terracotta-500 transition-all duration-300">Menu</a>
                     <a href="#catering" class="block px-4 py-3 rounded-xl text-charcoal-700 font-medium hover:bg-cream-100 hover:text-terracotta-500 transition-all duration-300">Catering</a>
                     <a href="#our-story" class="block px-4 py-3 rounded-xl text-charcoal-700 font-medium hover:bg-cream-100 hover:text-terracotta-500 transition-all duration-300">Our Story</a>
@@ -376,7 +371,7 @@
         <div class="absolute inset-0">
             <img
                 id="hero-bg-img"
-                src="hero-bg.jpg"
+                src="images/hero-bg.jpg"
                 alt="Mother and daughter cooking together in a warm kitchen"
                 class="w-full h-full object-cover"
                 style="object-position: 70% center;"
@@ -387,17 +382,17 @@
         <div class="hero-overlay absolute inset-0"></div>
 
         <!-- Content — strictly left-aligned, occupies left ~50% -->
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-24 pb-12 sm:pt-28 sm:pb-20">
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-28 pb-20">
             <div class="flex flex-col items-start text-left max-w-xl lg:max-w-2xl">
 
                 <!-- Tag / Badge -->
-                <div class="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 mb-5 sm:mb-7 shadow-sm border border-warm-200 animate-fade-in">
+                <div class="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 mb-7 shadow-sm border border-warm-200 animate-fade-in">
                     <span class="w-2 h-2 rounded-full bg-olive-500 animate-pulse"></span>
                     <span id="hero-badge-text" class="text-sm font-semibold text-olive-700 tracking-wide">Handcrafted with Love</span>
                 </div>
 
                 <!-- Main Headline -->
-                <h1 id="hero-h1" class="font-serif font-bold text-charcoal-900 leading-[1.1] mb-4 sm:mb-5 animate-slide-up"
+                <h1 id="hero-h1" class="font-serif font-bold text-charcoal-900 leading-[1.1] mb-5 animate-slide-up"
                     style="font-size: clamp(2.4rem, 5vw, 4.25rem);">
                     <span id="hero-h1-l1">Wholesome Goodness,</span>
                     <span id="hero-h1-l2" class="block text-terracotta-500 italic">Delivered to</span>
@@ -405,7 +400,7 @@
                 </h1>
 
                 <!-- Subheadline -->
-                <p id="hero-subtext" class="text-base sm:text-lg text-charcoal-700/85 leading-relaxed mb-6 sm:mb-9 max-w-md animate-slide-up"
+                <p id="hero-subtext" class="text-base sm:text-lg text-charcoal-700/85 leading-relaxed mb-9 max-w-md animate-slide-up"
                    style="animation-delay: 0.2s;">
                     Authentic homemade meals and artisanal snacks made with love —
                     from our kitchen to your table.
@@ -430,7 +425,7 @@
                 </div>
 
                 <!-- Rating / Trust Row -->
-                <div class="flex items-center gap-3 sm:gap-5 mt-8 sm:mt-10 animate-fade-in" style="animation-delay: 0.8s;">
+                <div class="flex items-center gap-5 mt-10 animate-fade-in" style="animation-delay: 0.8s;">
                     <div class="flex items-center gap-1">
                         <div class="flex">
                             <span class="star-filled text-lg">★</span>
@@ -463,10 +458,10 @@
     </section>
 
     <!-- ========== MENU SECTION ========== -->
-    <section id="menu" class="relative py-10 sm:py-16 bg-cream-50">
+    <section id="menu" class="relative py-20 sm:py-28 bg-cream-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Header -->
-            <div class="text-center mb-6 sm:mb-8 reveal">
+            <div class="text-center mb-16 reveal">
                 <span class="inline-block text-terracotta-500 font-semibold text-sm uppercase tracking-widest mb-3">Our Menu</span>
                 <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-charcoal-900 mb-4">
                     Crafted with <span class="text-terracotta-500 italic">Care</span>
@@ -482,125 +477,14 @@
             </div>
 
             <!-- Menu Grid -->
-            <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-                <article class="menu-card bg-white rounded-3xl overflow-hidden shadow-sm border border-warm-100 reveal visible" style="transition-delay: 0.1s;">
-                    <div class="relative overflow-hidden">
-                        <img src="snack-box.png" alt="Signature Snack Box" class="w-full h-56 object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
-                        <div class="price-badge absolute top-4 right-4 w-16 h-16 rounded-full flex flex-col items-center justify-center text-white shadow-lg">
-                            <span class="text-[10px] font-medium uppercase leading-none">Price</span>
-                            <span class="text-lg font-bold leading-tight">$24</span>
-                        </div>
-                    </div>
-                    <div class="p-4 sm:p-5">
-                        <div class="flex items-center gap-1 mb-2">
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="text-xs text-charcoal-500 ml-1">4.9</span>
-                        </div>
-                        <span class="text-xs font-semibold text-olive-500 uppercase tracking-wider">Bestseller</span>
-                        <h3 class="font-serif text-xl font-bold text-charcoal-800 mt-1 mb-2">Signature Snack Box</h3>
-                        <p class="text-sm text-charcoal-500 leading-relaxed mb-3 sm:mb-4">A curated selection of crispy samosas, spring rolls, spiced pakoras, and three artisanal chutneys.</p>
-                        <button onclick="addToCart('Signature Snack Box')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                            </svg>
-                            Add to Cart
-                        </button>
-                    </div>
-                </article>
-                <article class="menu-card bg-white rounded-3xl overflow-hidden shadow-sm border border-warm-100 reveal visible" style="transition-delay: 0.2s;">
-                    <div class="relative overflow-hidden">
-                        <img src="comfort-meal.png" alt="Comfort Meal of the Day" class="w-full h-56 object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
-                        <div class="price-badge absolute top-4 right-4 w-16 h-16 rounded-full flex flex-col items-center justify-center text-white shadow-lg">
-                            <span class="text-[10px] font-medium uppercase leading-none">Price</span>
-                            <span class="text-lg font-bold leading-tight">$18</span>
-                        </div>
-                    </div>
-                    <div class="p-4 sm:p-5">
-                        <div class="flex items-center gap-1 mb-2">
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="text-xs text-charcoal-500 ml-1">4.9</span>
-                        </div>
-                        <span class="text-xs font-semibold text-olive-500 uppercase tracking-wider">Chef's Pick</span>
-                        <h3 class="font-serif text-xl font-bold text-charcoal-800 mt-1 mb-2">Comfort Meal of the Day</h3>
-                        <p class="text-sm text-charcoal-500 leading-relaxed mb-3 sm:mb-4">Aromatic chicken biryani with fragrant spices, creamy raita, and warm naan bread on the side.</p>
-                        <button onclick="addToCart('Comfort Meal of the Day')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                            </svg>
-                            Add to Cart
-                        </button>
-                    </div>
-                </article>
-                <article class="menu-card bg-white rounded-3xl overflow-hidden shadow-sm border border-warm-100 reveal visible" style="transition-delay: 0.30000000000000004s;">
-                    <div class="relative overflow-hidden">
-                        <img src="cookies.png" alt="Artisanal Cookies" class="w-full h-56 object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
-                        <div class="price-badge absolute top-4 right-4 w-16 h-16 rounded-full flex flex-col items-center justify-center text-white shadow-lg">
-                            <span class="text-[10px] font-medium uppercase leading-none">Price</span>
-                            <span class="text-lg font-bold leading-tight">$12</span>
-                        </div>
-                    </div>
-                    <div class="p-4 sm:p-5">
-                        <div class="flex items-center gap-1 mb-2">
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="text-xs text-charcoal-500 ml-1">4.9</span>
-                        </div>
-                        <span class="text-xs font-semibold text-olive-500 uppercase tracking-wider">Sweet Treats</span>
-                        <h3 class="font-serif text-xl font-bold text-charcoal-800 mt-1 mb-2">Artisanal Cookies</h3>
-                        <p class="text-sm text-charcoal-500 leading-relaxed mb-3 sm:mb-4">A dozen handmade cookies — chocolate chip, buttery shortbread, and crunchy almond. Pure bliss.</p>
-                        <button onclick="addToCart('Artisanal Cookies')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                            </svg>
-                            Add to Cart
-                        </button>
-                    </div>
-                </article>
-                <article class="menu-card bg-white rounded-3xl overflow-hidden shadow-sm border border-warm-100 reveal visible" style="transition-delay: 0.4s;">
-                    <div class="relative overflow-hidden">
-                        <img src="lemonade.png" alt="Fresh Lemonade" class="w-full h-56 object-cover transition-transform duration-700 hover:scale-110" loading="lazy">
-                        <div class="price-badge absolute top-4 right-4 w-16 h-16 rounded-full flex flex-col items-center justify-center text-white shadow-lg">
-                            <span class="text-[10px] font-medium uppercase leading-none">Price</span>
-                            <span class="text-lg font-bold leading-tight">$6</span>
-                        </div>
-                    </div>
-                    <div class="p-4 sm:p-5">
-                        <div class="flex items-center gap-1 mb-2">
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="star-filled text-sm">★</span>
-                            <span class="text-xs text-charcoal-500 ml-1">4.9</span>
-                        </div>
-                        <span class="text-xs font-semibold text-olive-500 uppercase tracking-wider">Refreshing</span>
-                        <h3 class="font-serif text-xl font-bold text-charcoal-800 mt-1 mb-2">Fresh Lemonade</h3>
-                        <p class="text-sm text-charcoal-500 leading-relaxed mb-3 sm:mb-4">Freshly squeezed lemonade with a hint of mint and honey. The perfect companion to any meal.</p>
-                        <button onclick="addToCart('Fresh Lemonade')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                            </svg>
-                            Add to Cart
-                        </button>
-                    </div>
-                </article>
+            <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                <!-- Dynamically populated by JS from localStorage -->
             </div>
         </div>
     </section>
 
     <!-- ========== OUR STORY SECTION ========== -->
-    <section id="our-story" class="relative py-10 sm:py-16 bg-warm-50 overflow-hidden">
+    <section id="our-story" class="relative py-20 sm:py-28 bg-warm-50 overflow-hidden">
         <!-- Wave top -->
         <div class="wave-top">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -612,11 +496,11 @@
         <div class="absolute top-0 right-0 w-64 h-64 dot-pattern opacity-30 rounded-full"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <!-- Image Side -->
                 <div class="relative reveal">
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl">
-                        <img id="story-img" src="spices.png" alt="Fresh spices and herbs arranged in ceramic bowls" class="w-full h-80 sm:h-96 lg:h-[480px] object-cover" loading="lazy">
+                        <img id="story-img" src="images/spices.png" alt="Fresh spices and herbs arranged in ceramic bowls" class="w-full h-80 sm:h-96 lg:h-[480px] object-cover" loading="lazy">
                     </div>
                     <!-- Floating accent -->
                     <div class="absolute -bottom-6 -right-6 bg-terracotta-100 rounded-2xl p-6 shadow-lg hidden sm:block">
@@ -688,7 +572,7 @@
     </section>
 
     <!-- ========== CATERING SECTION ========== -->
-    <section id="catering" class="relative py-12 sm:py-20 lg:py-28 bg-cream-50 overflow-hidden">
+    <section id="catering" class="relative py-20 sm:py-28 bg-cream-50 overflow-hidden">
         <!-- Wave top -->
         <div class="wave-top">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -697,7 +581,7 @@
         </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <!-- Form Side -->
                 <div class="order-2 lg:order-1 reveal">
                     <div class="bg-white rounded-3xl shadow-lg border border-warm-100 p-8 sm:p-10">
@@ -790,7 +674,7 @@
 
                     <!-- Catering Image -->
                     <div class="rounded-3xl overflow-hidden shadow-xl mb-8">
-                        <img id="catering-img" src="catering.png" alt="Beautiful catering spread" class="w-full h-64 sm:h-72 object-cover" loading="lazy">
+                        <img id="catering-img" src="images/catering.png" alt="Beautiful catering spread" class="w-full h-64 sm:h-72 object-cover" loading="lazy">
                     </div>
 
                     <!-- Stats -->
@@ -838,7 +722,7 @@
     </section>
 
     <!-- ========== FOOTER ========== -->
-    <footer id="contact" class="relative bg-charcoal-900 text-warm-300 pt-10 pb-6 sm:pt-16 sm:pb-8">
+    <footer id="contact" class="relative bg-charcoal-900 text-warm-300 pt-16 pb-8">
         <!-- Wave top -->
         <div class="wave-top">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -875,7 +759,6 @@
                 <div>
                     <h4 class="font-serif text-lg font-semibold text-cream-100 mb-5">Quick Links</h4>
                     <ul class="space-y-3">
-                        <li><a href="items.html" class="text-sm text-warm-400 hover:text-terracotta-300 transition-colors duration-300">Items</a></li>
                         <li><a href="#menu" class="text-sm text-warm-400 hover:text-terracotta-300 transition-colors duration-300">Menu</a></li>
                         <li><a href="#catering" class="text-sm text-warm-400 hover:text-terracotta-300 transition-colors duration-300">Catering</a></li>
                         <li><a href="#our-story" class="text-sm text-warm-400 hover:text-terracotta-300 transition-colors duration-300">Our Story</a></li>
@@ -1147,7 +1030,7 @@
             const defaultMenuData = [
                 {
                     id: 'menu-1',
-                    image: 'snack-box.png',
+                    image: 'images/snack-box.png',
                     name: 'Signature Snack Box',
                     price: '$24',
                     desc: 'A curated selection of crispy samosas, spring rolls, spiced pakoras, and three artisanal chutneys.',
@@ -1155,7 +1038,7 @@
                 },
                 {
                     id: 'menu-2',
-                    image: 'comfort-meal.png',
+                    image: 'images/comfort-meal.png',
                     name: 'Comfort Meal of the Day',
                     price: '$18',
                     desc: 'Aromatic chicken biryani with fragrant spices, creamy raita, and warm naan bread on the side.',
@@ -1163,7 +1046,7 @@
                 },
                 {
                     id: 'menu-3',
-                    image: 'cookies.png',
+                    image: 'images/cookies.png',
                     name: 'Artisanal Cookies',
                     price: '$12',
                     desc: 'A dozen handmade cookies — chocolate chip, buttery shortbread, and crunchy almond. Pure bliss.',
@@ -1171,7 +1054,7 @@
                 },
                 {
                     id: 'menu-4',
-                    image: 'lemonade.png',
+                    image: 'images/lemonade.png',
                     name: 'Fresh Lemonade',
                     price: '$6',
                     desc: 'Freshly squeezed lemonade with a hint of mint and honey. The perfect companion to any meal.',
@@ -1213,17 +1096,17 @@
             }
 
             // Apply Menu List
-            if (menuGrid && data && data.menu && data.menu.length > 0) {
-                menuGrid.innerHTML = "";
-                const menuArray = data.menu;
+            const menuArray = (data && data.menu && data.menu.length > 0) ? data.menu : defaultMenuData;
+            const menuGrid = document.getElementById('menu-grid');
+            
+            if (menuGrid) {
                 menuArray.forEach((item, index) => {
                     const delay = 0.1 * ((index % 4) + 1);
                     const article = document.createElement('article');
                     article.className = 'menu-card bg-white rounded-3xl overflow-hidden shadow-sm border border-warm-100 reveal visible';
                     article.style.transitionDelay = delay + 's';
                     
-                    const itemName = item.name || 'Menu Item';
-                    const escName = itemName.replace(/'/g, "\\'");
+                    const escName = item.name.replace(/'/g, "\\'");
                     
                     article.innerHTML = \`
                         <div class="relative overflow-hidden">
@@ -1233,7 +1116,7 @@
                                 <span class="text-lg font-bold leading-tight">\${item.price}</span>
                             </div>
                         </div>
-                        <div class="p-4 sm:p-5">
+                        <div class="p-5">
                             <div class="flex items-center gap-1 mb-2">
                                 <span class="star-filled text-sm">★</span>
                                 <span class="star-filled text-sm">★</span>
@@ -1244,7 +1127,7 @@
                             </div>
                             <span class="text-xs font-semibold text-olive-500 uppercase tracking-wider">\${item.label}</span>
                             <h3 class="font-serif text-xl font-bold text-charcoal-800 mt-1 mb-2">\${item.name}</h3>
-                            <p class="text-sm text-charcoal-500 leading-relaxed mb-3 sm:mb-4">\${item.desc}</p>
+                            <p class="text-sm text-charcoal-500 leading-relaxed mb-4">\${item.desc}</p>
                             <button onclick="addToCart('\${escName}')" class="w-full btn-primary text-white font-semibold py-3 rounded-full text-sm flex items-center justify-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
